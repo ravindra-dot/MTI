@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication Portal | MyTalentIndia</title>
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="/assets/images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/assets/images/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/assets/images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MTI" />
+    <link rel="manifest" href="/assets/images/favicon/site.webmanifest" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- 1. Load Google reCAPTCHA v3 API (Replace 'YOUR_SITE_KEY' with your actual site key from Google Admin Console) -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lc5ruwsAAAAAEA7eRiZ2fpUAg1b-ikB-EHOBKos"></script>
+    <style>
+        .grecaptcha-badge {
+    visibility: hidden;
+}
+    </style>
+</head>
+<body class="bg-blue-50 font-sans text-gray-800 flex flex-col min-h-screen">
+
+    <nav class="bg-white shadow-sm py-4 px-8 flex justify-between items-center">
+        <a href="index.html" class="text-xl font-bold text-blue-900">My<span class="text-orange-500">Talent</span>India</a>
+        <a href="index.html" class="text-sm font-semibold text-gray-500 hover:text-gray-800 transition">&larr; Return to Home</a>
+    </nav>
+
+    <div class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100">
+            <div class="flex border-b text-center font-bold text-sm uppercase tracking-wider">
+                <button id="tab-login" onclick="switchAuthTab('login')" class="w-1/2 py-4 text-blue-900 bg-white border-b-2 border-blue-900">Sign In</button>
+                <button id="tab-register" onclick="switchAuthTab('register')" class="w-1/2 py-4 text-gray-400 bg-gray-50 hover:bg-gray-100 transition">Create Account</button>
+            </div>
+
+            <div class="p-8 space-y-6">
+                <!-- Login Form -->
+                <form id="form-login" action="dashboard.html" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Registered Email</label>
+                        <input type="email" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:ring-2 focus:ring-blue-900 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Password</label>
+                        <input type="password" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:ring-2 focus:ring-blue-900 outline-none">
+                    </div>
+                    <button type="submit" class="w-full bg-blue-950 text-white font-bold py-3 rounded text-sm uppercase tracking-wider hover:bg-blue-900 transition">Access User Dashboard</button>
+                </form>
+
+                <!-- Registration Form -->
+                <form id="form-register" action="dashboard.html" method="POST" onsubmit="return handleRegisterSubmit(event)" class="space-y-4 hidden">
+                    
+                    <!-- 2. Hidden input to store the generated token to send to your backend server -->
+                    <input type="hidden" id="recaptcha-token" name="recaptcha-token">
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-500 mb-1">First Name</label>
+                            <input type="text" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Last Name</label>
+                            <input type="text" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Email Address</label>
+                        <input type="email" id="reg-email" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm outline-none">
+                        <p id="email-error" class="text-red-500 text-xs mt-1 hidden">Please provide a valid electronic email syntax structure.</p>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Password</label>
+                        <input type="password" id="reg-password" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm outline-none">
+                        <p id="password-error" class="text-red-500 text-xs mt-1 hidden">Password must be at least 8 characters long, and include an uppercase letter, a lowercase letter, and a number.</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Date of Birth</label>
+                            <input type="date" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Qualifications</label>
+                            <input type="text" required placeholder="e.g. Class 10" class="w-full border border-gray-300 rounded px-3 py-2 text-sm outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Updated Privacy/Terms notice as required by Google policy when hiding the badge -->
+                    <div class="text-[11px] text-gray-500 text-center pt-2">
+                        This site is protected by reCAPTCHA v3 and the Google 
+                        <a href="https://policies.google.com/privacy" class="text-blue-700 hover:underline" target="_blank">Privacy Policy</a> and 
+                        <a href="https://policies.google.com/terms" class="text-blue-700 hover:underline" target="_blank">Terms of Service</a> apply.
+                    </div>
+
+                    <button type="submit" class="w-full bg-blue-950 text-white font-bold py-3 rounded text-sm uppercase tracking-wider hover:bg-blue-900 transition">Proceed & Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+<script src="assets/js/auth.js"></script>
+</body>
+</html>
