@@ -1,3 +1,6 @@
+/* =========================================================
+              NAVBAR SCROLL EFFECT
+========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
     const navbar = document.getElementById("smart-navbar");
     const mobileMenuBtn = document.getElementById("mobile-menu-btn");
@@ -53,4 +56,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
         lastScrollY = currentScroll;
     });
+
+/* =========================================================
+              GUESTUSER AND USER VIEW RENDERER
+========================================================= */
+    // 1. Check if user is logged in
+    const isLoggedIn = typeof AuthEngine !== "undefined" ? AuthEngine.isLoggedIn() : false;
+    const user = typeof AuthEngine !== "undefined" ? AuthEngine.getCurrentUser() : null;
+    const userName = user ? user.name : "Participant";
+
+    // 2. DOM Elements Selection
+    const guestNavActions = document.getElementById("guest-nav-actions");
+    const userNavActions = document.getElementById("user-nav-actions");
+    const heroRegisterBtn = document.getElementById("hero-register-btn");
+    const heroDashboardBtn = document.getElementById("hero-dashboard-btn");
+    const guestCardContent = document.getElementById("guest-card-content");
+    const userCardContent = document.getElementById("user-card-content");
+    const welcomeUserName = document.getElementById("welcome-user-name");
+    
+
+    // 3. Render Logic depending on State
+    if (isLoggedIn) {
+        // Toggle Navbars Actions
+        if(guestNavActions) guestNavActions.classList.add("hidden");
+        if(userNavActions) userNavActions.classList.remove("hidden");
+
+        // Toggle Hero Buttons
+        if(heroRegisterBtn) heroRegisterBtn.classList.add("hidden");
+        if(heroDashboardBtn) heroDashboardBtn.classList.remove("hidden");
+
+        // Toggle Hero Cards Content (Right Side)
+        if(guestCardContent) guestCardContent.classList.add("hidden");
+        if(userCardContent) {
+            userCardContent.classList.remove("hidden");
+            if(welcomeUserName) welcomeUserName.textContent = userName;
+        }
+    } else {
+        // Guest layout setting (Fallback safety)
+        if(guestNavActions) guestNavActions.classList.remove("hidden");
+        if(userNavActions) userNavActions.classList.add("hidden");
+        if(heroRegisterBtn) heroRegisterBtn.classList.remove("hidden");
+        if(heroDashboardBtn) heroDashboardBtn.classList.add("hidden");
+        if(guestCardContent) guestCardContent.classList.remove("hidden");
+        if(userCardContent) userCardContent.classList.add("hidden");
+    }
 });

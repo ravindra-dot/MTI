@@ -59,8 +59,8 @@
                     <!-- CTA Button Box -->
                     <div class="flex items-center space-x-4">
                         <span class="text-sm font-semibold text-gray-600 hidden sm:inline"><i
-                                class="fa-regular fa-user mr-1"></i> ID: MTI-2026-8941</span>
-                        <a href="index.html"
+                                class="fa-regular fa-user mr-1"></i><span class="uid"></span></span>
+                        <a href="index.html" id="logout-btn"
                             class="bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-bold text-xs hover:bg-gray-300 transition">Logout</a>
                     </div>
                     <button id="mobile-menu-btn" class="lg:hidden text-blue-900 p-2 focus:outline-none text-xl"
@@ -92,170 +92,277 @@
     </nav>
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full space-y-6">
 
-    <!-- Global Info Banner -->
-    <div class="bg-emerald-100 text-emerald-700 border border-emerald-200 p-4 rounded-xl flex flex-wrap items-center justify-between gap-4">
-        <span class="text-xs uppercase font-black text-emerald-800">
-            <i class="fa-solid fa-bullhorn mr-1"></i> Welcome back! You are active in the National Track for Theme: "Future India / भविष्य का भारत".
-        </span>
-        <div class="flex gap-2">
-            <span class="bg-emerald-200/60 text-emerald-900 text-xs font-bold px-3 py-1.5 rounded-lg border border-emerald-300/50 flex items-center gap-1">
-                <i class="fa-solid fa-circle-check text-emerald-700"></i> Account Verified
+        <!-- Global Info Banner -->
+        <div
+            class="bg-emerald-100 text-emerald-700 border border-emerald-200 p-4 rounded-xl flex flex-wrap items-center justify-between gap-4">
+            <span class="text-xs uppercase font-black text-emerald-800">
+                <i class="fa-solid fa-bullhorn mr-1"></i> Welcome back! You are active in the National Track for Theme:
+                "Future India / भविष्य का भारत".
             </span>
-        </div>
-    </div>
-
-    <!-- Master Workspace Container Target -->
-    <div id="dynamic-workspace-target" class="w-full">
-        
-        <!-- STATE 1: Empty View Layout -->
-        <div id="view-state-empty" class="hidden">
-            <div class="bg-white p-12 text-center rounded-2xl shadow-sm border max-w-md mx-auto space-y-4 my-12">
-                <div class="w-16 h-16 bg-gray-100 text-gray-400 rounded-full flex items-center justify-center mx-auto text-2xl">
-                    <i class="fa-regular fa-folder-open"></i>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold text-gray-800">No Active Contests Enrolled</h3>
-                    <p class="text-sm text-gray-500 mt-1">You have not committed enrollment spaces inside active art tracks yet.</p>
-                </div>
-                <a href="index.html#categories" class="bg-orange-500 text-white font-bold px-6 py-2 rounded-full text-sm inline-block shadow hover:bg-orange-600 transition">
-                    Browse Contests Catalog
-                </a>
+            <div class="flex gap-2">
+                <span
+                    class="bg-emerald-200/60 text-emerald-900 text-xs font-bold px-3 py-1.5 rounded-lg border border-emerald-300/50 flex items-center gap-1">
+                    <i class="fa-solid fa-circle-check text-emerald-700"></i> Account Verified
+                </span>
             </div>
         </div>
 
-        <!-- STATE 2 & 3: Active Workspace Tracking Layout (Unpaid / Paid States) -->
-        <div id="view-state-workspace" class="hidden">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                
-                <!-- Main Workspace Node -->
-                <div class="lg:col-span-8 bg-white rounded-2xl shadow-sm border p-6 space-y-8">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-4 gap-4">
-                        <div>
-                            <span class="bg-blue-100 text-blue-800 font-bold uppercase tracking-wider text-[10px] px-2.5 py-1 rounded">
-                                Registered Contest Track
-                            </span>
-                            <h2 class="text-xl font-bold text-gray-800 mt-1">All India & Global Painting Competition 2026</h2>
-                        </div>
-                        <div class="flex flex-wrap items-center gap-2">
-                            <!-- Dynamic Payment Verification Badges -->
-                            <span id="badge-status-paid" class="hidden bg-emerald-100 text-emerald-700 font-bold text-xs px-3 py-1 rounded-full border border-emerald-200">
-                                <i class="fa-solid fa-check-double mr-1"></i> Paid & Verified
-                            </span>
-                            <span id="badge-status-unpaid" class="hidden bg-red-100 text-red-700 font-bold text-xs px-3 py-1 rounded-full border border-red-200 animate-pulse">
-                                <i class="fa-solid fa-hourglass-start mr-1"></i> Fees Pending
-                            </span>
+        <!--HERO SECTION-->
+        <section
+            class="bg-gradient-to-br from-blue-950 to-indigo-900 rounded-2xl shadow-xl overflow-hidden p-6 sm:p-8 text-white relative">
 
-                            <span class="bg-amber-100 text-amber-800 font-bold text-xs px-3 py-1 rounded-full border border-amber-200">
-                                <i class="fa-regular fa-clock mr-1"></i> Deadline Alert: 76 Days Remaining
-                            </span>
-                        </div>
+            <div class="absolute right-0 top-0 opacity-10 pointer-events-none transform translate-x-12 -translate-y-12">
+                <i class="fa-solid fa-palette text-[240px]"></i>
+            </div>
+
+            <div class="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                <!-- Left Side Welcome & Message -->
+                <div class="md:col-span-7 space-y-3 text-center md:text-left">
+                    <span
+                        class="bg-orange-500/20 text-orange-400 border border-orange-500/30 font-black text-[10px] tracking-widest uppercase px-3 py-1 rounded-full inline-block">
+                        Artist Workspace
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-black tracking-tight leading-tight">
+                        Welcome, <span class="u-name text-orange-400">User</span>! <br class="hidden sm:inline">
+                        Shine Across the Nation, Showcase Your Creativity!
+                    </h1>
+                    <p class="text-xs sm:text-sm text-blue-200 max-w-xl font-medium">
+                        Complete your fee transaction to unlock your official
+                        blueprint sheet layout, prepare your artwork, and upload your final artwork here for judging..
+                    </p>
+                </div>
+
+                <!-- Right Side Highlight Metrics / Quick Info Cards -->
+                <div class="md:col-span-5 grid grid-cols-2 gap-3 w-full">
+                    <div class="bg-white/10 backdrop-blur-md border border-white/10 p-4 rounded-xl space-y-1">
+                        <span class="text-blue-300 font-bold text-[10px] uppercase tracking-wider block">Art
+                            Track</span>
+                        <span class="text-sm font-black text-white block truncate">Painting 2026</span>
                     </div>
+                    <div class="bg-white/10 backdrop-blur-md border border-white/10 p-4 rounded-xl space-y-1">
+                        <span class="text-blue-300 font-bold text-[10px] uppercase tracking-wider block">Current
+                            Status</span>
+                        <span class="text-sm font-black text-orange-400 flex items-center gap-1">
+                            <i class="fa-solid fa-circle text-[8px] animate-pulse"></i> In Progress
+                        </span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md border border-white/10 p-4 rounded-xl space-y-1">
+                        <span class="text-blue-300 font-bold text-[10px] uppercase tracking-wider block">Submission
+                            Gate</span>
+                        <span class="text-sm font-black text-emerald-400">Active</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md border border-white/10 p-4 rounded-xl space-y-1">
+                        <span class="text-blue-300 font-bold text-[10px] uppercase tracking-wider block">National Rank
+                            Pool</span>
+                        <span class="text-sm font-black text-white">All India Elite</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                    <!-- Horizontal Roadmap Tracker Components -->
-                    <div class="block py-4 overflow-x-auto">
-                        <div class="relative min-w-[600px] px-4">
-                            <div class="absolute top-5 left-8 right-8 h-1 bg-gray-200 z-0"></div>
-                            
-                            <!-- Dynamic Width Progress Line (Controlled from JS) -->
-                            <div id="roadmap-progress-bar" class="absolute top-5 left-8 h-1 bg-gradient-to-r from-emerald-500 to-blue-500 z-0 transition-all duration-500" style="width: 12%;"></div>
-                            
-                            <div class="relative z-10 flex justify-between text-center">
-                                <!-- Step 1: Always Active -->
-                                <div class="flex flex-col items-center w-24">
-                                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 text-sm text-emerald-600 border-emerald-500 font-bold shadow-sm">
-                                        <i class="fa-solid fa-check"></i>
+        <!-- Master Workspace Container Target -->
+        <section id="dynamic-workspace-target" class="w-full">
+
+            <!-- STATE 1: Empty View Layout -->
+            <div id="view-state-empty" class="hidden">
+                <div class="bg-white p-12 text-center rounded-2xl shadow-sm border max-w-md mx-auto space-y-4 my-12">
+                    <div
+                        class="w-16 h-16 bg-gray-100 text-gray-400 rounded-full flex items-center justify-center mx-auto text-2xl">
+                        <i class="fa-regular fa-folder-open"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800">No Active Contests Enrolled</h3>
+                        <p class="text-sm text-gray-500 mt-1">You have not committed enrollment spaces inside active art
+                            tracks yet.</p>
+                    </div>
+                    <a href="index.html#categories"
+                        class="bg-orange-500 text-white font-bold px-6 py-2 rounded-full text-sm inline-block shadow hover:bg-orange-600 transition">
+                        Browse Contests Catalog
+                    </a>
+                </div>
+            </div>
+
+            <!-- STATE 2 & 3: Active Workspace Tracking Layout (Unpaid / Paid States) -->
+            <div id="view-state-workspace" class="hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+                    <!-- MAIN WORKSPACE-->
+                    <div class="lg:col-span-8 bg-white rounded-2xl shadow-sm border p-6 space-y-8">
+                        <div
+                            class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-4 gap-4">
+                            <div>
+                                <span
+                                    class="bg-blue-100 text-blue-800 font-bold uppercase tracking-wider text-[10px] px-2.5 py-1 rounded">
+                                    Registered Contest Track
+                                </span>
+                                <h2 class="text-xl font-bold text-gray-800 mt-1">All India & Global Painting Competition
+                                    2026</h2>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span id="badge-status-paid"
+                                    class="hidden bg-emerald-100 text-emerald-700 font-bold text-xs px-3 py-1 rounded-full border border-emerald-200">
+                                    <i class="fa-solid fa-check-double mr-1"></i> Paid & Verified
+                                </span>
+                                <span id="badge-status-unpaid"
+                                    class="hidden bg-red-100 text-red-700 font-bold text-xs px-3 py-1 rounded-full border border-red-200 animate-pulse">
+                                    <i class="fa-solid fa-hourglass-start mr-1"></i> Fees Pending
+                                </span>
+                                <span
+                                    class="bg-amber-100 text-amber-800 font-bold text-xs px-3 py-1 rounded-full border border-amber-200">
+                                    <i class="fa-regular fa-clock mr-1"></i> Deadline Alert: 76 Days Remaining
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Horizontal Roadmap Tracker Components -->
+                        <div class="block py-4 overflow-x-auto">
+                            <div class="relative min-w-[600px] px-4">
+                                <div class="absolute top-5 left-8 right-8 h-1 bg-gray-200 z-0"></div>
+                                <div id="roadmap-progress-bar"
+                                    class="absolute top-5 left-8 h-1 bg-gradient-to-r from-emerald-500 to-blue-500 z-0 transition-all duration-500"
+                                    style="width: 12%;"></div>
+
+                                <div class="relative z-10 flex justify-between text-center">
+                                    <div class="flex flex-col items-center w-24">
+                                        <div
+                                            class="w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 text-sm text-emerald-600 border-emerald-500 font-bold shadow-sm">
+                                            <i class="fa-solid fa-check"></i>
+                                        </div>
+                                        <span class="text-xs mt-2 font-bold text-emerald-600">Step 1: Registered</span>
                                     </div>
-                                    <span class="text-xs mt-2 font-bold text-emerald-600">Step 1: Registered</span>
+                                    <div class="flex flex-col items-center w-24">
+                                        <div id="roadmap-step-2-node"
+                                            class="w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 text-sm shadow-sm">
+                                            <i id="roadmap-step-2-icon" class="fa-solid"></i>
+                                        </div>
+                                        <span id="roadmap-step-2-text" class="text-xs mt-2 font-bold">Step 2: Fees
+                                            Paid</span>
+                                    </div>
+                                    <div class="flex flex-col items-center w-24">
+                                        <div id="roadmap-step-3-node"
+                                            class="w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 text-sm shadow-sm">
+                                            <i id="roadmap-step-3-icon" class="fa-solid"></i>
+                                        </div>
+                                        <span id="roadmap-step-3-text" class="text-xs mt-2">Step 3: Sheet Layout</span>
+                                    </div>
+                                    <div class="flex flex-col items-center w-24">
+                                        <div
+                                            class="w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 text-sm text-gray-400 border-gray-200 shadow-sm">
+                                            <i class="fa-solid fa-circle"></i>
+                                        </div>
+                                        <span class="text-xs mt-2 font-medium text-gray-400">Step 4: Uploaded</span>
+                                    </div>
                                 </div>
-                                
-                                <!-- Step 2: Modifies based on Payment state -->
-                                <div class="flex flex-col items-center w-24">
-                                    <div id="roadmap-step-2-node" class="w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 text-sm shadow-sm">
-                                        <i id="roadmap-step-2-icon" class="fa-solid"></i>
-                                    </div>
-                                    <span id="roadmap-step-2-text" class="text-xs mt-2 font-bold">Step 2: Fees Paid</span>
+                            </div>
+                        </div>
+
+                        <!-- Layout Action Modules -->
+                        <div class="border-t pt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="p-5 bg-slate-50 rounded-xl border border-gray-200 space-y-3">
+                                <h4 class="font-bold text-gray-800">Contest Blueprint Sheet Layout</h4>
+                                <p class="text-xs text-gray-500">Official printable design framework papers
+                                    configurations profiles layers assets mapping.</p>
+                                <a id="blueprint-btn-unlocked" href="assets/resource/info-banner.png"
+                                    download="assets/resource/info-banner.png"
+                                    class="hidden w-full bg-blue-900 text-white font-bold py-2 rounded text-xs uppercase tracking-wider text-center block shadow hover:bg-blue-800 transition">
+                                    <i class="fa-solid fa-download mr-1"></i> Download Design Sheet Layout
+                                </a>
+                                <button id="blueprint-btn-locked" disabled
+                                    class="hidden w-full bg-gray-200 text-gray-400 font-bold py-2 rounded text-xs uppercase cursor-not-allowed flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-lock"></i> Locked Pending Payment Checks
+                                </button>
+                            </div>
+
+                            <div class="p-5 bg-slate-50 rounded-xl border border-gray-200 space-y-3">
+                                <h4 class="font-bold text-gray-800">Finished Artwork Submission Drop</h4>
+                                <p class="text-xs text-gray-500">Upload your final artwork here for judging.</p>
+                                <div id="dropzone-node-unlocked"
+                                    class="hidden border-2 border-dashed border-blue-300 hover:border-blue-500 transition bg-white text-center py-4 rounded cursor-pointer space-y-1">
+                                    <i class="fa-solid fa-cloud-arrow-up text-blue-500 text-lg"></i>
+                                    <span class="text-xs font-bold text-gray-700 block">Drag & Drop Finished Scan File
+                                        Here</span>
                                 </div>
-                                
-                                <!-- Step 3: Modifies based on Payment state -->
-                                <div class="flex flex-col items-center w-24">
-                                    <div id="roadmap-step-3-node" class="w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 text-sm shadow-sm">
-                                        <i id="roadmap-step-3-icon" class="fa-solid"></i>
-                                    </div>
-                                    <span id="roadmap-step-3-text" class="text-xs mt-2">Step 3: Sheet Layout</span>
-                                </div>
-                                
-                                <!-- Step 4: Final State Block -->
-                                <div class="flex flex-col items-center w-24">
-                                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 text-sm text-gray-400 border-gray-200 shadow-sm">
-                                        <i class="fa-solid fa-circle"></i>
-                                    </div>
-                                    <span class="text-xs mt-2 font-medium text-gray-400">Step 4: Uploaded</span>
+                                <div id="dropzone-node-locked"
+                                    class="hidden border border-dashed bg-gray-100 text-center py-4 rounded text-xs text-gray-400 font-bold uppercase">
+                                    <i class="fa-solid fa-ban mr-1"></i> Upload Workspace Inactive
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Layout Subscriptions Action Modules -->
-                    <div class="border-t pt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Module 1: Design Sheet Layout Blueprint -->
-                        <div class="p-5 bg-slate-50 rounded-xl border border-gray-200 space-y-3">
-                            <h4 class="font-bold text-gray-800">Contest Blueprint Sheet Layout</h4>
-                            <p class="text-xs text-gray-500">Official printable design framework papers configurations profiles layers assets mapping.</p>
-                            
-                            <a id="blueprint-btn-unlocked" href="assets/resource/info-banner.png" download="assets/resource/info-banner.png" class="hidden w-full bg-blue-900 text-white font-bold py-2 rounded text-xs uppercase tracking-wider text-center block shadow hover:bg-blue-800 transition">
-                                <i class="fa-solid fa-download mr-1"></i> Download Design Sheet Layout
-                            </a>
-                            <button id="blueprint-btn-locked" disabled class="hidden w-full bg-gray-200 text-gray-400 font-bold py-2 rounded text-xs uppercase cursor-not-allowed flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-lock"></i> Locked Pending Payment Checks
+                    <!-- RIGHT SIDEBAR SIDE CONTAINER -->
+                    <div class="lg:col-span-4 space-y-6">
+
+                        <!-- Payment Section Card -->
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 space-y-4">
+                            <h3 class="font-black text-gray-800 text-sm uppercase tracking-wider border-b pb-2">Payment
+                                Section</h3>
+                            <div class="flex justify-between items-center text-sm font-medium">
+                                <span class="text-gray-500">Registration Fee</span>
+                                <span class="font-mono font-bold text-gray-700">₹49.00 INR</span>
+                            </div>
+                            <div id="accounting-status-paid"
+                                class="hidden bg-emerald-50 text-emerald-800 p-3 rounded-xl border border-emerald-200 text-xs text-center font-bold flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-circle-check"></i>Registration Fee Paid
+                            </div>
+                            <button id="checkout-cta-btn"
+                                class="hidden w-full bg-orange-500 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-widest shadow-md hover:bg-orange-600 transition block text-center">
+                                <i class="fa-solid fa-credit-card mr-1"></i> Pay Fee and Unlock Assets
                             </button>
                         </div>
 
-                        <!-- Module 2: Submission Upload Dropzone -->
-                        <div class="p-5 bg-slate-50 rounded-xl border border-gray-200 space-y-3">
-                            <h4 class="font-bold text-gray-800">Finished Artwork Submission Drop</h4>
-                            <p class="text-xs text-gray-500">Sync completed work assets tracking configurations nodes pipelines directly to server repositories.</p>
-                            
-                            <div id="dropzone-node-unlocked" class="hidden border-2 border-dashed border-blue-300 hover:border-blue-500 transition bg-white text-center py-4 rounded cursor-pointer space-y-1">
-                                <i class="fa-solid fa-cloud-arrow-up text-blue-500 text-lg"></i>
-                                <span class="text-xs font-bold text-gray-700 block">Drag & Drop Finished Scan File Here</span>
-                            </div>
-                            <div id="dropzone-node-locked" class="hidden border border-dashed bg-gray-100 text-center py-4 rounded text-xs text-gray-400 font-bold uppercase">
-                                <i class="fa-solid fa-ban mr-1"></i> Upload Workspace Inactive
+                        <!-- Terms & Conditions Card -->
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 space-y-4">
+                            <h2
+                                class="text-base font-black text-blue-950 uppercase tracking-tight flex items-center gap-2 border-b pb-2">
+                                <i class="fa-solid fa-scale-balanced text-orange-500 text-sm"></i> Terms & Conditions
+                            </h2>
+                            <div class="space-y-3 text-xs text-gray-600">
+                                <div class="flex items-start gap-2.5">
+                                    <i
+                                        class="fa-solid fa-circle-chevron-right text-orange-500 mt-0.5 flex-shrink-0 text-[10px]"></i>
+                                    <p>Artwork must be 100% original. Any form of plagiarism or tracing will lead to
+                                        instantaneous disqualification.</p>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <i
+                                        class="fa-solid fa-circle-chevron-right text-orange-500 mt-0.5 flex-shrink-0 text-[10px]"></i>
+                                    <p>Entries once fully submitted onto the dashboard system are locked final and
+                                        cannot be modified under any scenarios.</p>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <i
+                                        class="fa-solid fa-circle-chevron-right text-orange-500 mt-0.5 flex-shrink-0 text-[10px]"></i>
+                                    <p>The strategic decision of the authorized MyTalentIndia specialized judging panel
+                                        will remain ultimate, final, and binding.</p>
+                                </div>
+                                <div class="flex items-start gap-2.5">
+                                    <i
+                                        class="fa-solid fa-circle-chevron-right text-orange-500 mt-0.5 flex-shrink-0 text-[10px]"></i>
+                                    <p>By participating, you inherently grant MyTalentIndia media rights to showcases
+                                        the design assets on public channels for promotion.</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <!-- Financial Balance Statement Sidebar Layout Module -->
-                <div class="lg:col-span-4 bg-white p-6 rounded-2xl shadow-sm border border-gray-200 space-y-4">
-                    <h3 class="font-black text-gray-800 text-sm uppercase tracking-wider border-b pb-2">Financial Accounting</h3>
-                    <div class="flex justify-between items-center text-sm font-medium">
-                        <span class="text-gray-500">Registration Audit:</span>
-                        <span class="font-mono font-bold text-gray-700">₹49.00 INR</span>
                     </div>
-                    
-                    <div id="accounting-status-paid" class="hidden bg-emerald-50 text-emerald-800 p-3 rounded-xl border border-emerald-200 text-xs text-center font-bold flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-circle-check"></i> Allocation Fee Cleared
-                    </div>
-                    <button id="checkout-cta-btn" class="hidden w-full bg-orange-500 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-widest shadow-md hover:bg-orange-600 transition block text-center">
-                        <i class="fa-solid fa-credit-card mr-1"></i> Pay Fee and Unlock Assets
-                    </button>
-                </div>
 
+                </div>
             </div>
+
+        </section>
+    </main>
+
+    <!-- Status Gateway Modal Loader Window -->
+    <div id="payment-modal"
+        class="hidden fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white p-8 rounded-2xl max-w-sm w-full text-center space-y-4 shadow-2xl">
+            <div class="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto">
+            </div>
+            <h3 class="text-lg font-black text-blue-950">Redirecting to Payment Gateway Portal...</h3>
+            <p class="text-xs text-gray-500">Securing your structural checkout validation channel</p>
         </div>
-
     </div>
-</main>
-
-<!-- Status Gateway Modal Loader Window -->
-<div id="payment-modal" class="hidden fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-    <div class="bg-white p-8 rounded-2xl max-w-sm w-full text-center space-y-4 shadow-2xl">
-        <div class="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
-        <h3 class="text-lg font-black text-blue-950">Redirecting to Payment Gateway Portal...</h3>
-        <p class="text-xs text-gray-500">Securing your structural checkout validation channel pipelines safely.</p>
-    </div>
-</div>
 
     <footer class="bg-zinc-950 text-zinc-200 border-t border-zinc-800 mt-auto">
         <div class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
@@ -312,9 +419,8 @@
             </div>
         </div>
     </footer>
-
+    <script src="assets/js/mock-user.js"></script>
     <script src="assets/js/dashboard.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="assets/js/main.js"></script>
 </body>
 
