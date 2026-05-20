@@ -13,7 +13,7 @@
     <meta name="apple-mobile-web-app-title" content="MTI" />
     <link rel="manifest" href="/assets/images/favicon/site.webmanifest" />
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -90,6 +90,7 @@
             </div>
         </div>
     </nav>
+
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full space-y-6">
 
         <!-- Global Info Banner -->
@@ -107,7 +108,7 @@
             </div>
         </div>
 
-        <!--HERO SECTION-->
+        <!-- HERO SECTION -->
         <section
             class="bg-gradient-to-br from-blue-950 to-indigo-900 rounded-2xl shadow-xl overflow-hidden p-6 sm:p-8 text-white relative">
 
@@ -127,8 +128,8 @@
                         Shine Across the Nation, Showcase Your Creativity!
                     </h1>
                     <p class="text-xs sm:text-sm text-blue-200 max-w-xl font-medium">
-                        Complete your fee transaction to unlock your official
-                        blueprint sheet layout, prepare your artwork, and upload your final artwork here for judging..
+                        Complete your fee transaction to unlock your official blueprint sheet layout, prepare your
+                        artwork, and upload your final artwork here for judging.
                     </p>
                 </div>
 
@@ -149,7 +150,7 @@
                     <div class="bg-white/10 backdrop-blur-md border border-white/10 p-4 rounded-xl space-y-1">
                         <span class="text-blue-300 font-bold text-[10px] uppercase tracking-wider block">Submission
                             Gate</span>
-                        <span class="text-sm font-black text-emerald-400">Active</span>
+                        <span id="global-gate-status" class="text-sm font-black text-emerald-400">Active</span>
                     </div>
                     <div class="bg-white/10 backdrop-blur-md border border-white/10 p-4 rounded-xl space-y-1">
                         <span class="text-blue-300 font-bold text-[10px] uppercase tracking-wider block">National Rank
@@ -182,12 +183,12 @@
                 </div>
             </div>
 
-            <!-- STATE 2 & 3: Active Workspace Tracking Layout (Unpaid / Paid States) -->
-            <div id="view-state-workspace" class="hidden">
+            <!-- STATE 2 & 3: Active Workspace Tracking Layout (State Engine Managed) -->
+            <div id="view-state-workspace" class="block">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-                    <!-- MAIN WORKSPACE-->
-                    <div class="lg:col-span-8 bg-white rounded-2xl shadow-sm border p-6 space-y-8">
+                    <!-- MAIN WORKSPACE -->
+                    <div class="lg:col-span-8 bg-white rounded-2xl shadow-sm border-gray-800 p-6 space-y-8">
                         <div
                             class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-4 gap-4">
                             <div>
@@ -200,7 +201,7 @@
                             </div>
                             <div class="flex flex-wrap items-center gap-2">
                                 <span id="badge-status-paid"
-                                    class="hidden bg-emerald-100 text-emerald-700 font-bold text-xs px-3 py-1 rounded-full border border-emerald-200">
+                                    class="bg-emerald-100 text-emerald-700 font-bold text-xs px-3 py-1 rounded-full border border-emerald-200 flex items-center">
                                     <i class="fa-solid fa-check-double mr-1"></i> Paid & Verified
                                 </span>
                                 <span id="badge-status-unpaid"
@@ -209,82 +210,154 @@
                                 </span>
                                 <span
                                     class="bg-amber-100 text-amber-800 font-bold text-xs px-3 py-1 rounded-full border border-amber-200">
-                                    <i class="fa-regular fa-clock mr-1"></i> Deadline Alert: 76 Days Remaining
+                                    <i class="fa-regular fa-clock mr-1"></i> 76 Days Remaining
                                 </span>
                             </div>
                         </div>
 
-                        <!-- Horizontal Roadmap Tracker Components -->
+                        <!-- 5-STEP VISUAL STATUS TRACKER COMPONENT (Horizontal Roadmap) -->
                         <div class="block py-4 overflow-x-auto">
-                            <div class="relative min-w-[600px] px-4">
-                                <div class="absolute top-5 left-8 right-8 h-1 bg-gray-200 z-0"></div>
+                            <div class="relative min-w-[750px] px-4">
+                                <!-- Background Static Track Line -->
+                                <div class="absolute top-5 left-10 right-10 h-1 bg-gray-200 z-0"></div>
                                 <div id="roadmap-progress-bar"
-                                    class="absolute top-5 left-8 h-1 bg-gradient-to-r from-emerald-500 to-blue-500 z-0 transition-all duration-500"
+                                    class="absolute top-5 left-10 h-1 bg-gradient-to-r from-emerald-500 to-blue-500 z-0 transition-all duration-500"
                                     style="width: 12%;"></div>
 
                                 <div class="relative z-10 flex justify-between text-center">
-                                    <div class="flex flex-col items-center w-24">
-                                        <div
-                                            class="w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 text-sm text-emerald-600 border-emerald-500 font-bold shadow-sm">
-                                            <i class="fa-solid fa-check"></i>
+                                    <!-- Step 1: Registered -->
+                                    <div class="flex flex-col items-center w-28">
+                                        <div id="roadmap-step-1-node"
+                                            class="w-10 h-10 bg-emerald-500 text-white rounded-full flex items-center justify-center border-2 border-emerald-500 text-sm font-bold shadow">
+                                            <i id="roadmap-step-1-icon" class="fa-solid fa-check"></i>
                                         </div>
-                                        <span class="text-xs mt-2 font-bold text-emerald-600">Step 1: Registered</span>
+                                        <span id="roadmap-step-1-text"
+                                            class="text-xs mt-2 font-bold text-emerald-600">Step 1: Registered</span>
+                                        <span id="roadmap-step-1-sub"
+                                            class="text-[10px] text-gray-400 font-medium">(Completed)</span>
                                     </div>
-                                    <div class="flex flex-col items-center w-24">
+
+                                    <!-- Step 2: Fees Paid -->
+                                    <div class="flex flex-col items-center w-28">
                                         <div id="roadmap-step-2-node"
-                                            class="w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 text-sm shadow-sm">
-                                            <i id="roadmap-step-2-icon" class="fa-solid"></i>
+                                            class="w-10 h-10 bg-white text-gray-400 rounded-full flex items-center justify-center border-2 border-gray-200 text-sm font-bold shadow">
+                                            <i id="roadmap-step-2-icon" class="fa-solid fa-credit-card"></i>
                                         </div>
-                                        <span id="roadmap-step-2-text" class="text-xs mt-2 font-bold">Step 2: Fees
-                                            Paid</span>
+                                        <span id="roadmap-step-2-text"
+                                            class="text-xs mt-2 font-medium text-gray-500">Step 2: Fees Payment</span>
+                                        <span id="roadmap-step-2-sub"
+                                            class="text-[10px] text-gray-400 font-medium">(Pending)</span>
                                     </div>
-                                    <div class="flex flex-col items-center w-24">
+
+                                    <!-- Step 3: Artwork Downloaded -->
+                                    <div class="flex flex-col items-center w-28">
                                         <div id="roadmap-step-3-node"
-                                            class="w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 text-sm shadow-sm">
-                                            <i id="roadmap-step-3-icon" class="fa-solid"></i>
+                                            class="w-10 h-10 bg-white text-gray-300 rounded-full flex items-center justify-center border-2 border-gray-100 text-sm font-bold shadow">
+                                            <i id="roadmap-step-3-icon" class="fa-solid fa-arrow-down"></i>
                                         </div>
-                                        <span id="roadmap-step-3-text" class="text-xs mt-2">Step 3: Sheet Layout</span>
+                                        <span id="roadmap-step-3-text"
+                                            class="text-xs mt-2 font-medium text-gray-400">Step 3: Download
+                                            Layout</span>
+                                        <span id="roadmap-step-3-sub"
+                                            class="text-[10px] text-gray-400 font-medium">(Locked)</span>
                                     </div>
-                                    <div class="flex flex-col items-center w-24">
-                                        <div
-                                            class="w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 text-sm text-gray-400 border-gray-200 shadow-sm">
-                                            <i class="fa-solid fa-circle"></i>
+
+                                    <!-- Step 4: Artwork Submitted -->
+                                    <div class="flex flex-col items-center w-28">
+                                        <div id="roadmap-step-4-node"
+                                            class="w-10 h-10 bg-white text-gray-300 rounded-full flex items-center justify-center border-2 border-gray-100 text-sm shadow-sm">
+                                            <i id="roadmap-step-4-icon" class="fa-solid fa-cloud-arrow-up"></i>
                                         </div>
-                                        <span class="text-xs mt-2 font-medium text-gray-400">Step 4: Uploaded</span>
+                                        <span id="roadmap-step-4-text"
+                                            class="text-xs mt-2 font-medium text-gray-400">Step 4: Submit Your
+                                            Artwork</span>
+                                        <span id="roadmap-step-4-sub"
+                                            class="text-[10px] text-gray-400 font-medium">(Locked)</span>
+                                    </div>
+
+                                    <!-- Step 5: Review & Results -->
+                                    <div class="flex flex-col items-center w-28">
+                                        <div id="roadmap-step-5-node"
+                                            class="w-10 h-10 bg-white text-gray-300 rounded-full flex items-center justify-center border-2 border-gray-100 text-sm shadow-inner">
+                                            <i id="roadmap-step-5-icon" class="fa-solid fa-trophy"></i>
+                                        </div>
+                                        <span id="roadmap-step-5-text"
+                                            class="text-xs mt-2 font-medium text-gray-400">Step 5: Review &
+                                            Status</span>
+                                        <span id="roadmap-step-5-sub"
+                                            class="text-[10px] text-gray-400 font-medium">(Locked)</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Layout Action Modules -->
+                        <!-- ACTION MODULES SECTION -->
                         <div class="border-t pt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="p-5 bg-slate-50 rounded-xl border border-gray-200 space-y-3">
-                                <h4 class="font-bold text-gray-800">Contest Blueprint Sheet Layout</h4>
-                                <p class="text-xs text-gray-500">Official printable design framework papers
-                                    configurations profiles layers assets mapping.</p>
-                                <a id="blueprint-btn-unlocked" href="assets/resource/info-banner.png"
-                                    download="assets/resource/info-banner.png"
-                                    class="hidden w-full bg-blue-900 text-white font-bold py-2 rounded text-xs uppercase tracking-wider text-center block shadow hover:bg-blue-800 transition">
-                                    <i class="fa-solid fa-download mr-1"></i> Download Design Sheet Layout
-                                </a>
-                                <button id="blueprint-btn-locked" disabled
-                                    class="hidden w-full bg-gray-200 text-gray-400 font-bold py-2 rounded text-xs uppercase cursor-not-allowed flex items-center justify-center gap-2">
-                                    <i class="fa-solid fa-lock"></i> Locked Pending Payment Checks
-                                </button>
+                            <!-- Download Button Segment-->
+                            <div
+                                class="p-5 bg-slate-50 rounded-xl border border-gray-200 space-y-4 flex flex-col justify-between text-center items-center">
+                                <div class="flex flex-col items-center">
+                                    <div
+                                        class="inline-flex p-3 bg-blue-100 text-blue-600 rounded-full mb-3 animate-bounce">
+                                        <i class="fa-solid fa-file-arrow-down text-xl"></i>
+                                    </div>
+
+                                    <!-- Content Area -->
+                                    <h4 class="font-bold text-gray-800">Contest Blueprint Sheet Layout</h4>
+                                    <p class="text-xs text-gray-500 mt-1 max-w-sm">Official printable design framework
+                                        and instructions mapping profiles for submission configurations.</p>
+                                </div>
+
+                                <!-- Buttons wrapper modified to center children perfectly -->
+                                <div class="pt-2 flex flex-col items-center justify-center w-full">
+                                    <a id="blueprint-btn-unlocked" href="assets/resource/info-banner.png" download
+                                        class="w-full bg-blue-900 text-white font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider text-center block shadow hover:bg-blue-800 transition duration-200">
+                                        <i class="fa-solid fa-download mr-1.5"></i> Download Design Sheet Layout
+                                    </a>
+                                    <button id="blueprint-btn-locked" disabled
+                                        class="hidden w-full bg-gray-200 text-gray-400 font-bold py-2.5 px-4 rounded-xl text-xs uppercase cursor-not-allowed flex items-center justify-center gap-2">
+                                        <i class="fa-solid fa-lock"></i> Locked Pending Payment
+                                    </button>
+                                </div>
                             </div>
 
-                            <div class="p-5 bg-slate-50 rounded-xl border border-gray-200 space-y-3">
-                                <h4 class="font-bold text-gray-800">Finished Artwork Submission Drop</h4>
-                                <p class="text-xs text-gray-500">Upload your final artwork here for judging.</p>
-                                <div id="dropzone-node-unlocked"
-                                    class="hidden border-2 border-dashed border-blue-300 hover:border-blue-500 transition bg-white text-center py-4 rounded cursor-pointer space-y-1">
-                                    <i class="fa-solid fa-cloud-arrow-up text-blue-500 text-lg"></i>
-                                    <span class="text-xs font-bold text-gray-700 block">Drag & Drop Finished Scan File
-                                        Here</span>
+                            <!-- Upload Section Segment -->
+                            <div
+                                class="p-5 bg-slate-50 rounded-xl border border-gray-200 space-y-4 flex flex-col justify-between text-center items-center">
+                                <div class="flex flex-col items-center">
+                                    <div
+                                        class="inline-flex p-3 bg-blue-100 text-blue-600 rounded-full mb-3 animate-bounce">
+                                        <i class="fa-solid fa-cloud-arrow-up text-xl"></i>
+                                    </div>
+                                    <h4 class="font-bold text-gray-800">Finished Artwork Submission Drop</h4>
+                                    <p class="text-xs text-gray-500 mt-1 max-w-sm">Upload your final colored artwork
+                                        image files directly into the platform repository for evaluation panel
+                                        assessments.</p>
                                 </div>
-                                <div id="dropzone-node-locked"
-                                    class="hidden border border-dashed bg-gray-100 text-center py-4 rounded text-xs text-gray-400 font-bold uppercase">
-                                    <i class="fa-solid fa-ban mr-1"></i> Upload Workspace Inactive
+
+                                <!-- Upload Dropzones Trigger Area -->
+                                <div class="pt-2 w-full">
+                                    <!-- Unlocked / Active Dropzone -->
+                                    <div id="dropzone-node-unlocked"
+                                        class="border-2 border-dashed border-blue-300 hover:border-blue-500 transition-colors bg-white text-center py-6 px-4 rounded-xl cursor-pointer space-y-2 group w-full flex flex-col items-center justify-center">
+                                        <i
+                                            class="fa-solid fa-cloud-arrow-up text-blue-500 text-2xl group-hover:scale-110 transition-transform duration-200"></i>
+                                        <div>
+                                            <span class="text-xs font-bold text-gray-700 block">Drag & Drop Finished
+                                                Artwork Here</span>
+                                            <span class="text-[10px] text-gray-400 block mt-0.5">or <span
+                                                    class="text-blue-600 underline">Browse files</span> from your
+                                                computer</span>
+                                        </div>
+                                        <input type="file" id="artwork-file-picker" class="hidden"
+                                            accept="image/*,.pdf" />
+                                    </div>
+
+                                    <!-- Locked / Inactive State Button Structure (FIXED: Perfectly Centered & Premium padded design) -->
+                                    <div id="dropzone-node-locked"
+                                        class="hidden border border-dashed bg-gray-100 text-center py-6 px-4 rounded-xl text-xs text-gray-400 font-bold uppercase tracking-wider flex items-center justify-center gap-2 w-full">
+                                        <i class="fa-solid fa-ban text-sm"></i> Upload Workspace Inactive
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -306,7 +379,7 @@
                                 <i class="fa-solid fa-circle-check"></i>Registration Fee Paid
                             </div>
                             <button id="checkout-cta-btn"
-                                class="hidden w-full bg-orange-500 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-widest shadow-md hover:bg-orange-600 transition block text-center">
+                                class="w-full bg-orange-500 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-widest shadow-md hover:bg-orange-600 transition block text-center">
                                 <i class="fa-solid fa-credit-card mr-1"></i> Pay Fee and Unlock Assets
                             </button>
                         </div>
@@ -407,7 +480,7 @@
                 <div class="text-center sm:text-left space-y-1">
                     <div>&copy; 2026 MyTalentIndia. All Rights Reserved.</div>
                     <div class="text-[11px] text-zinc-600">
-                        Designed & Developed by <a href="#"
+                        Designed & Developed by <a href="https://r7softservices.com/"
                             class="text-zinc-500 hover:text-green-500 transition-colors font-medium">R7 Soft
                             Services</a>
                     </div>
