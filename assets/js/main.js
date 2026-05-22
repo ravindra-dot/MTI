@@ -67,25 +67,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 2. DOM Elements Selection
     const guestNavActions = document.getElementById("guest-nav-actions");
+    const MguestNavActions = document.getElementById("Mguest-nav-actions");
     const userNavActions = document.getElementById("user-nav-actions");
     const heroRegisterBtn = document.getElementById("hero-register-btn");
     const heroDashboardBtn = document.getElementById("hero-dashboard-btn");
     const guestCardContent = document.getElementById("guest-card-content");
     const userCardContent = document.getElementById("user-card-content");
     const welcomeUserName = document.getElementById("welcome-user-name");
-    
 
-    // 3. Render Logic depending on State
+// 3. Render Logic depending on State
     if (isLoggedIn) {
-        // Toggle Navbars Actions
-        if(guestNavActions) guestNavActions.classList.add("hidden");
-        if(userNavActions) userNavActions.classList.remove("hidden");
-
-        // Toggle Hero Buttons
+        if(guestNavActions) {
+            guestNavActions.classList.replace("lg:flex", "hidden");
+        }
+        if(MguestNavActions) {
+            MguestNavActions.classList.replace("block", "hidden");
+        }
+        if(userNavActions) {
+            userNavActions.classList.remove("hidden");
+            userNavActions.classList.add("flex");
+        }
         if(heroRegisterBtn) heroRegisterBtn.classList.add("hidden");
         if(heroDashboardBtn) heroDashboardBtn.classList.remove("hidden");
 
-        // Toggle Hero Cards Content (Right Side)
         if(guestCardContent) guestCardContent.classList.add("hidden");
         if(userCardContent) {
             userCardContent.classList.remove("hidden");
@@ -93,10 +97,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     } else {
         // Guest layout setting (Fallback safety)
-        if(guestNavActions) guestNavActions.classList.remove("hidden");
-        if(userNavActions) userNavActions.classList.add("hidden");
+        if(guestNavActions) {
+            guestNavActions.classList.remove("hidden");
+            guestNavActions.classList.add("hidden", "lg:flex");
+        }
+        if(MguestNavActions) {
+            MguestNavActions.classList.remove("hidden");
+            MguestNavActions.classList.add("block", "lg:hidden");
+        }
+        if(userNavActions) {
+            userNavActions.classList.replace("flex", "hidden");
+        }
         if(heroRegisterBtn) heroRegisterBtn.classList.remove("hidden");
-        if(heroDashboardBtn) heroDashboardBtn.classList.add("hidden");
+        if(heroDashboardBtn) heroDashboardBtn.shadowRoot ? "" : heroDashboardBtn.classList.add("hidden"); 
         if(guestCardContent) guestCardContent.classList.remove("hidden");
         if(userCardContent) userCardContent.classList.add("hidden");
     }

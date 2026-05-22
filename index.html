@@ -84,8 +84,9 @@
 
                 <div class="flex items-center gap-3 sm:gap-4">
 
-                    <!-- GUEST STATE -->
-                    <div id="guest-nav-actions">
+                    <!-- GUEST STATE (DESKTOP) -->
+                    <!-- Changed class to 'hidden lg:flex' so CSS keeps it hidden on mobile by default -->
+                    <div id="guest-nav-actions" class="hidden lg:flex">
                         <a href="auth.html"
                             class="relative inline-flex items-center justify-center px-5 sm:px-6 py-2.5 overflow-hidden rounded-full font-semibold text-white text-sm bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-[1.03] active:scale-95 transition-all duration-300 group">
 
@@ -110,14 +111,9 @@
                             <!-- Avatar -->
                             <div
                                 class="relative h-11 w-11 rounded-full overflow-hidden ring-2 ring-blue-500/30 group-hover:ring-blue-500 transition-all duration-300">
-
                                 <img src="assets/images/logo-icon.png" alt="Dashboard"
                                     class="h-full w-full object-cover group-hover:scale-110 transition-transform duration-300"
                                     loading="lazy">
-
-                                <!-- Online Dot -->
-                                <span
-                                    class="absolute bottom-0 right-0 h-3.5 w-3.5 bg-green-500 border-2 border-white rounded-full"></span>
                             </div>
 
                             <!-- User Text -->
@@ -139,7 +135,6 @@
                     <button id="mobile-menu-btn"
                         class="lg:hidden h-11 w-11 flex items-center justify-center rounded-full bg-white shadow-md text-blue-900 hover:bg-blue-900 hover:text-white transition-all duration-300 focus:outline-none"
                         aria-label="Toggle Menu">
-
                         <i id="menu-icon" class="fa-solid fa-bars text-lg"></i>
                     </button>
 
@@ -147,9 +142,28 @@
 
             </div>
         </div>
+
+        <!-- MOBILE DROPDOWN MENU -->
         <div id="mobile-dropdown-menu"
             class="hidden lg:hidden bg-white border-t border-gray-100 shadow-inner overflow-hidden transition-all duration-300">
             <div class="px-4 pt-2 pb-6 space-y-3 font-semibold text-sm uppercase text-gray-600 tracking-wide">
+
+                <!-- GUEST STATE (MOBILE) -->
+                <!-- Wrapped matching your design structure, explicitly hidden on desktop scales -->
+                <div id="Mguest-nav-actions" class="block lg:hidden pt-2 px-3">
+                    <a href="auth.html"
+                        class="relative inline-flex items-center justify-center px-5 py-2.5 overflow-hidden rounded-full font-semibold text-white text-sm bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 transition-all duration-300 group text-center">
+
+                        <span class="relative z-10 flex items-center gap-2">
+                            <i class="fa-solid fa-user"></i>
+                            Login
+                        </span>
+
+                        <span
+                            class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition duration-300"></span>
+                    </a>
+                </div>
+
                 <a href="#about"
                     class="mobile-nav-link block py-2.5 px-3 rounded-xl hover:bg-gray-50 hover:text-orange-500 transition">About</a>
                 <a href="#how-it-works"
@@ -382,141 +396,268 @@
     </section>
     <!-- How to participate section ends here -->
 
-    <!-- Main Container Section -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <!-- Left Section: Themes -->
-        <section id="themes" class="space-y-4">
+    <!--  THEMES SECTION -->
+<section id="themes" class="space-y-6">
+
+    <!-- Center Heading -->
+    <div class="flex justify-center">
+        <div class="flex items-center gap-3">
             <h2
                 class="text-xl sm:text-2xl font-black text-white bg-purple-900 px-5 py-3 rounded-xl inline-block tracking-wide">
-                THEMES & ARTISTIC FREEDOM
+                THEMES &amp; ARTISTIC FREEDOM
             </h2>
-            <div class="space-y-3">
-                <div
-                    class="p-4 bg-white rounded-xl shadow-sm border-l-4 border-orange-500 hover:shadow-md transition-shadow">
-                    <h4 class="font-bold text-gray-800 text-sm sm:text-base">Future India</h4>
-                    <p class="text-xs text-gray-500 mt-1 leading-relaxed">Visualize India’s progress in technology,
-                        infrastructure, or society.</p>
-                </div>
-                <div
-                    class="p-4 bg-white rounded-xl shadow-sm border-l-4 border-blue-500 hover:shadow-md transition-shadow">
-                    <h4 class="font-bold text-gray-800 text-sm sm:text-base">Digital India</h4>
-                    <p class="text-xs text-gray-500 mt-1 leading-relaxed">Focus on the transformation brought by the
-                        digital revolution.</p>
-                </div>
-                <div
-                    class="p-4 bg-white rounded-xl shadow-sm border-l-4 border-green-500 hover:shadow-md transition-shadow">
-                    <h4 class="font-bold text-gray-800 text-sm sm:text-base">Clean India</h4>
-                    <p class="text-xs text-gray-500 mt-1 leading-relaxed">Highlight the importance of hygiene and a
-                        litter-free nation.</p>
-                </div>
-                <div
-                    class="p-4 bg-white rounded-xl shadow-sm border-l-4 border-yellow-500 hover:shadow-md transition-shadow">
-                    <h4 class="font-bold text-gray-800 text-sm sm:text-base">Indian Culture & Heritage</h4>
-                    <p class="text-xs text-gray-500 mt-1 leading-relaxed">Celebrate the rich traditions and diversity of
-                        India.</p>
-                </div>
-                <div
-                    class="p-4 bg-white rounded-xl shadow-sm border-l-4 border-emerald-600 hover:shadow-md transition-shadow">
-                    <h4 class="font-bold text-gray-800 text-sm sm:text-base">Environment / Climate Change</h4>
-                    <p class="text-xs text-gray-500 mt-1 leading-relaxed">Raise awareness about sustainability and
-                        protecting our planet.</p>
-                </div>
+        </div>
+    </div>
+
+    <!-- Theme Cards -->
+    <div class="flex flex-wrap justify-center gap-5">
+
+        <!-- Card-->
+        <div
+            class="group w-full sm:w-[48%] lg:w-[31%] bg-white border border-zinc-200 border-l-4 border-l-orange-500 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center">
+
+            <div
+                class="h-12 w-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mb-4 text-lg shrink-0">
+                <i class="fa-solid fa-city"></i>
             </div>
 
-            <div class="p-4 bg-zinc-50 border border-zinc-200 rounded-xl space-y-3">
-                <div>
-                    <h4 class="text-xs font-bold text-zinc-700 uppercase tracking-wide flex items-center gap-2">
-                        <i class="fa-solid fa-palette text-purple-600"></i> Mediums Allowed
-                    </h4>
-                    <p class="text-xs text-zinc-600 mt-1 leading-relaxed font-medium">
-                        Drawing, Sketching, Watercolors, Acrylics, Oil Paints, or Digital Painting tools.
-                    </p>
-                </div>
-                <div class="border-t border-zinc-200"></div>
-                <div class="flex items-start gap-2.5">
-                    <span class="text-red-500 mt-0.5"><i class="fa-solid fa-triangle-exclamation"></i></span>
-                    <div>
-                        <h5 class="text-[11px] font-bold text-red-700 uppercase tracking-wide">Strict Policy: No AI Art
-                        </h5>
-                        <p class="text-[11px] text-zinc-500 mt-0.5 leading-relaxed">
-                            Digital Painting is allowed, but <span class="font-bold text-red-600">NO AI-generated
-                                art</span>. Winners must provide layer breakdown or time-lapse video as proof.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
+            <h4 class="font-extrabold text-gray-900 text-base mb-2">
+                Future India
+            </h4>
 
-        <!-- Right Section: Categories -->
-        <section id="categories" class="space-y-4">
+            <p class="text-sm text-gray-500 leading-relaxed">
+                Visualize India’s progress in technology, infrastructure, innovation, or society.
+            </p>
+        </div>
+
+        <!-- Card -->
+        <div
+            class="group w-full sm:w-[48%] lg:w-[31%] bg-white border border-zinc-200 border-l-4 border-l-blue-500 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center">
+
+            <div
+                class="h-12 w-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mb-4 text-lg shrink-0">
+                <i class="fa-solid fa-globe"></i>
+            </div>
+
+            <h4 class="font-extrabold text-gray-900 text-base mb-2">
+                Digital India
+            </h4>
+
+            <p class="text-sm text-gray-500 leading-relaxed">
+                Showcase the transformation brought by the digital revolution and smart technologies.
+            </p>
+        </div>
+
+        <!-- Card -->
+        <div
+            class="group w-full sm:w-[48%] lg:w-[31%] bg-white border border-zinc-200 border-l-4 border-l-green-500 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center">
+
+            <div
+                class="h-12 w-12 rounded-xl bg-green-100 text-green-600 flex items-center justify-center mb-4 text-lg shrink-0">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+
+            <h4 class="font-extrabold text-gray-900 text-base mb-2">
+                Clean India
+            </h4>
+
+            <p class="text-sm text-gray-500 leading-relaxed">
+                Highlight hygiene, cleanliness, awareness, and a litter-free nation.
+            </p>
+        </div>
+
+        <!-- Card -->
+        <div
+            class="group w-full sm:w-[48%] lg:w-[31%] bg-white border border-zinc-200 border-l-4 border-l-yellow-500 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center">
+
+            <div
+                class="h-12 w-12 rounded-xl bg-yellow-100 text-yellow-600 flex items-center justify-center mb-4 text-lg shrink-0">
+                <i class="fa-solid fa-landmark"></i>
+            </div>
+
+            <h4 class="font-extrabold text-gray-900 text-base mb-2">
+                Indian Culture & Heritage
+            </h4>
+
+            <p class="text-sm text-gray-500 leading-relaxed">
+                Celebrate traditions, festivals, monuments, and the diversity of India.
+            </p>
+        </div>
+
+        <!-- Card -->
+        <div
+            class="group w-full sm:w-[48%] lg:w-[31%] bg-white border border-zinc-200 border-l-4 border-l-emerald-500 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center">
+
+            <div
+                class="h-12 w-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-4 text-lg shrink-0">
+                <i class="fa-solid fa-earth-asia"></i>
+            </div>
+
+            <h4 class="font-extrabold text-gray-900 text-base mb-2">
+                Environment & Climate Change
+            </h4>
+
+            <p class="text-sm text-gray-500 leading-relaxed">
+                Spread awareness about sustainability, nature, and protecting our planet.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Rules & Mediums Notice Block -->
+    <div
+        class="max-w-[95%] lg:max-w-[96%] mx-auto p-5 bg-zinc-50 border border-zinc-200 rounded-2xl space-y-4 shadow-sm">
+        <div>
+            <h4 class="text-xs font-bold text-zinc-700 uppercase tracking-wide flex items-center gap-2">
+                <i class="fa-solid fa-palette text-purple-600"></i> Mediums Allowed
+            </h4>
+            <p class="text-xs sm:text-sm text-zinc-600 mt-1 leading-relaxed font-medium">
+                Drawing, Sketching, Watercolors, Acrylics, Oil Paints, or Digital Painting tools.
+            </p>
+        </div>
+        <div class="border-t border-zinc-200"></div>
+        <div class="flex items-start gap-3">
+            <span class="text-red-500 mt-0.5"><i class="fa-solid fa-triangle-exclamation"></i></span>
+            <div>
+                <h5 class="text-xs font-bold text-red-700 uppercase tracking-wide">Strict Policy: No AI Art</h5>
+                <p class="text-xs sm:text-sm text-zinc-500 mt-0.5 leading-relaxed">
+                    Digital Painting is allowed, but <span class="font-bold text-red-600">NO AI-generated
+                        art</span>. Winners must provide layer breakdown or time-lapse video as proof.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- CATEGORIES SECTION -->
+<section id="categories" class="space-y-6 mt-16">
+
+    <!-- Center Heading -->
+    <div class="flex justify-center">
+        <div class="flex items-center gap-3">
             <h2
                 class="text-xl sm:text-2xl font-black text-white bg-blue-900 px-5 py-3 rounded-xl inline-block tracking-wide">
                 PARTICIPATION CATEGORIES
             </h2>
-            <div class="space-y-3">
-                <div
-                    class="p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-blue-200 transition-all">
-                    <div class="flex justify-between items-center mb-1">
-                        <span class="font-extrabold text-gray-800 text-sm sm:text-base">Group A</span>
-                        <span class="text-xs bg-blue-50 text-blue-600 font-bold px-2.5 py-1 rounded-full">Ages 2 –
-                            4</span>
-                    </div>
-                    <p class="text-xs text-gray-500 font-medium">For our tiny toddlers starting their first strokes of
-                        creativity.</p>
-                </div>
-                <div
-                    class="p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-blue-200 transition-all">
-                    <div class="flex justify-between items-center mb-1">
-                        <span class="font-extrabold text-gray-800 text-sm sm:text-base">Group B</span>
-                        <span class="text-xs bg-blue-50 text-blue-600 font-bold px-2.5 py-1 rounded-full">Ages 5 –
-                            7</span>
-                    </div>
-                    <p class="text-xs text-gray-500 font-medium">For our youngest stars starting their creative journey.
-                    </p>
-                </div>
-                <div
-                    class="p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-blue-200 transition-all">
-                    <div class="flex justify-between items-center mb-1">
-                        <span class="font-extrabold text-gray-800 text-sm sm:text-base">Group C</span>
-                        <span class="text-xs bg-blue-50 text-blue-600 font-bold px-2.5 py-1 rounded-full">Ages 8 –
-                            11</span>
-                    </div>
-                    <p class="text-xs text-gray-500 font-medium">For primary school artists with big ideas.</p>
-                </div>
-                <div
-                    class="p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-blue-200 transition-all">
-                    <div class="flex justify-between items-center mb-1">
-                        <span class="font-extrabold text-gray-800 text-sm sm:text-base">Group D</span>
-                        <span class="text-xs bg-blue-50 text-blue-600 font-bold px-2.5 py-1 rounded-full">Ages 12 –
-                            16</span>
-                    </div>
-                    <p class="text-xs text-gray-500 font-medium">Dedicated to high school students.</p>
-                </div>
-                <div
-                    class="p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-blue-200 transition-all">
-                    <div class="flex justify-between items-center mb-1">
-                        <span class="font-extrabold text-gray-800 text-sm sm:text-base">Group E</span>
-                        <span class="text-xs bg-blue-50 text-blue-600 font-bold px-2.5 py-1 rounded-full">Ages
-                            17+</span>
-                    </div>
-                    <p class="text-xs text-gray-500 font-medium">Open for college students and independent young
-                        artists.</p>
-                </div>
+        </div>
+    </div>
+
+    <!-- Category Cards -->
+    <div class="flex flex-wrap justify-center gap-5">
+
+        <!-- Group A -->
+        <div
+            class="w-full sm:w-[48%] lg:w-[31%] bg-white border border-zinc-200 border-l-4 border-l-blue-600 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+
+            <div class="flex items-center justify-between mb-4">
+                <h4 class="font-black text-lg text-gray-900">
+                    Group A
+                </h4>
+
+                <span class="text-xs font-bold bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
+                    Ages 2 – 4
+                </span>
             </div>
 
-            <!-- Institutional Note Card -->
-            <div class="p-4 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-3">
-                <span class="text-amber-600 mt-0.5"><i class="fa-solid fa-building-columns text-base"></i></span>
-                <div>
-                    <h4 class="text-xs font-bold text-amber-800 uppercase tracking-wide">Note for Institutions</h4>
-                    <p class="text-xs text-amber-700 mt-0.5 leading-relaxed">
-                        We offer specialized <span class="font-bold">School and College Group Entry</span> options to
-                        facilitate easy bulk registration.
-                    </p>
-                </div>
+            <p class="text-sm text-gray-500 leading-relaxed">
+                For toddlers beginning their first creative journey with colors and shapes.
+            </p>
+        </div>
+
+        <!-- Group B -->
+        <div
+            class="w-full sm:w-[48%] lg:w-[31%] bg-white border border-zinc-200 border-l-4 border-l-orange-500 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+
+            <div class="flex items-center justify-between mb-4">
+                <h4 class="font-black text-lg text-gray-900">
+                    Group B
+                </h4>
+
+                <span class="text-xs font-bold bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
+                    Ages 5 – 7
+                </span>
             </div>
-        </section>
-    </main>
+
+            <p class="text-sm text-gray-500 leading-relaxed">
+                Young artists exploring imagination and colorful storytelling.
+            </p>
+        </div>
+
+        <!-- Group C -->
+        <div
+            class="w-full sm:w-[48%] lg:w-[31%] bg-white border border-zinc-200 border-l-4 border-l-blue-600 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+
+            <div class="flex items-center justify-between mb-4">
+                <h4 class="font-black text-lg text-gray-900">
+                    Group C
+                </h4>
+
+                <span class="text-xs font-bold bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
+                    Ages 8 – 11
+                </span>
+            </div>
+
+            <p class="text-sm text-gray-500 leading-relaxed">
+                Primary school participants with creative ideas and expressive thinking.
+            </p>
+        </div>
+
+        <!-- Group D -->
+        <div
+            class="w-full sm:w-[48%] lg:w-[31%] bg-white border border-zinc-200 border-l-4 border-l-4 border-l-yellow-500 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+
+            <div class="flex items-center justify-between mb-4">
+                <h4 class="font-black text-lg text-gray-900">
+                    Group D
+                </h4>
+
+                <span class="text-xs font-bold bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
+                    Ages 12 – 16
+                </span>
+            </div>
+
+            <p class="text-sm text-gray-500 leading-relaxed">
+                High school students ready to showcase advanced creativity and skills.
+            </p>
+        </div>
+
+        <!-- Group E -->
+        <div
+            class="w-full sm:w-[48%] lg:w-[31%] bg-white border border-zinc-200 border-l-4 border-l-emerald-500 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+
+            <div class="flex items-center justify-between mb-4">
+                <h4 class="font-black text-lg text-gray-900">
+                    Group E
+                </h4>
+
+                <span class="text-xs font-bold bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
+                    Ages 17+
+                </span>
+            </div>
+
+            <p class="text-sm text-gray-500 leading-relaxed">
+                Open category for college students and independent artists.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Institutional Note Card -->
+        <div
+            class="max-w-[95%] lg:max-w-[96%] mx-auto p-5 bg-amber-50 border border-amber-200 border-l-4 border-l-amber-500 rounded-2xl flex items-start gap-3 shadow-sm">
+            <span class="text-amber-600 mt-0.5"><i class="fa-solid fa-building-columns text-base"></i></span>
+            <div>
+                <h4 class="text-xs font-bold text-amber-800 uppercase tracking-wide">Note for Institutions</h4>
+                <p class="text-xs sm:text-sm text-amber-700 mt-0.5 leading-relaxed">
+                    We offer specialized <span class="font-bold">School and College Group Entry</span> options to
+                    facilitate easy bulk registration.
+                </p>
+            </div>
+        </div>
+
+    </section>
 
     <!--Rewards, Recognition -->
     <section id="prizes"

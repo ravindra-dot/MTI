@@ -149,7 +149,7 @@ function updateDashboardProgress() {
         "w-10 h-10 bg-emerald-500 text-white rounded-full flex items-center justify-center border-2 border-emerald-500 text-sm font-bold shadow";
     if (step3Icon) step3Icon.className = "fa-solid fa-check";
     if (step3Text)
-      step3Text.className = "text-xs mt-2 font-bold text-emerald-600";
+      step3Text.className = "text-xs mt-2 font-bold text-emerald-600"; step3Text.textContent="Step 3: Donloaded"
     if (step3SubText) step3SubText.textContent = "(Downloaded)";
 
     if (step4Node)
@@ -157,10 +157,10 @@ function updateDashboardProgress() {
         "w-10 h-10 bg-white text-blue-600 rounded-full flex items-center justify-center border-2 border-blue-500 text-sm font-bold shadow";
     if (step4Icon)
       step4Icon.className = "fa-solid fa-circle-notch animate-spin";
-    if (step4Text) step4Text.className = "text-xs mt-2 font-bold text-blue-600";
+    if (step4Text) step4Text.className = "text-xs mt-2 font-bold text-blue-600"; step4Text.textContent="Step 4: Artwork Submitted";
     if (step4SubText) {
       step4SubText.className = "text-[10px] text-blue-500 font-semibold";
-      step4SubText.textContent = "(Under Review)";
+      step4SubText.textContent = "(Under Review)"; 
     }
   }
 
@@ -240,7 +240,7 @@ function bindStaticEventListeners() {
 
         updateDashboardProgress();
         alert(
-          `${e.target.files[0].name} uploaded successfully onto evaluation grid!`,
+          `${e.target.files[0].name} uploaded successfully`,
         );
       }
     });
@@ -248,12 +248,57 @@ function bindStaticEventListeners() {
 }
 
 /*====================================================
-    --- DOM CORE INITIALIZER ---
+    --- DOM Content Loaded function ---
 =======================================================*/
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   const mobileMenuBtn = document.getElementById("mobile-menu-btn");
   const mobileDropdownMenu = document.getElementById("mobile-dropdown-menu");
   const menuIcon = document.getElementById("menu-icon");
+  const logoutBtn = document.getElementById("logout-btn");
+  const modal = document.getElementById('certificate-modal');
+  const certForm = document.getElementById('certificate-form');
+  const headerCloseBtn = document.getElementById('close-modal-header-btn');
+  const footerCloseBtn = document.getElementById('close-modal-footer-btn');
+  const nameInput = document.getElementById('cert-full-name');
+  
+  const openModalBtn = document.querySelector('[onclick*="certificate-modal"]'); 
+
+  const openModal = () => {
+    if (modal && nameInput) {
+      modal.classList.remove('hidden');
+      nameInput.focus();
+    }
+  };
+
+  const closeModal = () => {
+    if (modal && certForm) {
+      modal.classList.add('hidden');
+      certForm.reset(); 
+    }
+  };
+
+  if (openModalBtn) {
+    openModalBtn.removeAttribute('onclick');
+    openModalBtn.addEventListener('click', openModal);
+  }
+  
+  headerCloseBtn?.addEventListener('click', closeModal);
+  footerCloseBtn?.addEventListener('click', closeModal);
+
+  modal?.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
+
+  certForm?.addEventListener('submit', (event) => {
+    event.preventDefault();  
+    const participantName = nameInput.value.trim();
+    if (participantName) {
+      console.log(`Processing PDF Generation payload for name: ${participantName}`);    
+      closeModal();
+    }
+  });
 
   if (mobileMenuBtn && mobileDropdownMenu) {
     mobileMenuBtn.addEventListener("click", () => {
@@ -265,17 +310,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  bindStaticEventListeners();
-  setUIState("unpaid");
-  
-  document.getElementById("logout-btn")?.addEventListener("click", () => {
+  logoutBtn?.addEventListener("click", () => {
     if (typeof AuthEngine !== "undefined") {
       AuthEngine.logout();
     } else {
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("userName");
+      localStorage.removeItem("paymentStatus"); 
     }
     alert("Logging out...");
     window.location.href = "index.html";
   });
+
+  if (typeof bindStaticEventListeners === "function") {
+    bindStaticEventListeners();
+  }
+
+  if (typeof setUIState === "function") {
+    const isPaid = localStorage.getItem("paymentStatus") === "paid";
+    setUIState(isPaid ? "paid" : "unpaid");
+  }
 });

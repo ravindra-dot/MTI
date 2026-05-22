@@ -28,14 +28,11 @@
                 <a href="index.html"
                     class="flex flex-col items-center text-center select-none group focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md"
                     aria-label="MyTalentIndia Home">
-                    <!-- Logo Image on Top -->
                     <img class="h-12 w-12 sm:h-14 sm:w-14 shrink-0 transition-transform group-hover:scale-105 duration-200"
-                        src="assets/images/logo-icon.png" alt="MyTalentIndia Logo">
-
-                    <!-- Text Below Logo -->
+                        src="assets/images/logo-icon.png" alt="MyTalentIndia Logo" loading="lazy">
                     <div class="flex flex-col items-center mt-1">
                         <h2 class="text-base sm:text-lg font-black text-blue-900 leading-none tracking-tight">
-                            My<span class="text-orange-500">Talent</span>India
+                            My<span class="text-orange-500"> Talent </span>India
                         </h2>
                         <span
                             class="text-[8px] sm:text-[9px] text-gray-400 tracking-widest font-bold uppercase leading-none mt-1">
@@ -368,20 +365,33 @@
 
                         <!-- Payment Section Card -->
                         <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 space-y-4">
-                            <h3 class="font-black text-gray-800 text-sm uppercase tracking-wider border-b pb-2">Payment
-                                Section</h3>
+                            <h3 class="font-black text-gray-800 text-sm uppercase tracking-wider border-b pb-2">
+                                Payment & Benefits
+                            </h3>
                             <div class="flex justify-between items-center text-sm font-medium">
                                 <span class="text-gray-500">Registration Fee</span>
                                 <span class="font-mono font-bold text-gray-700">₹49.00 INR</span>
                             </div>
-                            <div id="accounting-status-paid"
-                                class="hidden bg-emerald-50 text-emerald-800 p-3 rounded-xl border border-emerald-200 text-xs text-center font-bold flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-circle-check"></i>Registration Fee Paid
-                            </div>
+
+                            <!-- Payment State Element: Unpaid Structure -->
                             <button id="checkout-cta-btn"
                                 class="w-full bg-orange-500 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-widest shadow-md hover:bg-orange-600 transition block text-center">
                                 <i class="fa-solid fa-credit-card mr-1"></i> Pay Fee and Unlock Assets
                             </button>
+
+                            <!-- Payment State Element: Paid Structure (Visible when dynamic state engine fires verified status) -->
+                            <div id="accounting-status-paid" class="space-y-3">
+                                <div class="bg-emerald-50 text-emerald-800 p-3 rounded-xl border border-emerald-200 text-xs text-center font-bold flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-circle-check text-sm"></i> Registration Fee Paid
+                                </div>
+                                
+                                <!-- Premium Certificate Download CTA Trigger -->
+                                <button type="button" onclick="document.getElementById('certificate-modal').classList.remove('hidden')"
+                                    class="w-full bg-gradient-to-r from-blue-700 to-indigo-800 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider shadow-md hover:from-blue-800 hover:to-indigo-900 transition-all duration-200 flex items-center justify-center gap-2 group">
+                                    <i class="fa-solid fa-award text-sm text-amber-400 group-hover:scale-110 transition-transform"></i> 
+                                    Claim & Download Certificate
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Terms & Conditions Card -->
@@ -425,6 +435,54 @@
 
         </section>
     </main>
+
+    <div id="certificate-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl border border-zinc-100 overflow-hidden transform transition-all duration-300">
+            
+            <!-- Modal Header -->
+            <div class="bg-gradient-to-r from-blue-950 to-indigo-900 px-6 py-4 text-white flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-medal text-amber-400 text-lg"></i>
+                    <h3 class="font-black tracking-wide text-xs uppercase">Configure Participation Certificate</h3>
+                </div>
+                <button type="button" onclick="document.getElementById('certificate-modal').classList.add('hidden')" 
+                    class="text-white/70 hover:text-white transition cursor-pointer text-sm">
+                    <i class="fa-solid fa-xmark text-base"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content Form -->
+            <form class="p-6 space-y-4">
+                <div class="space-y-1">
+                    <label for="cert-full-name" class="block text-xs font-bold text-gray-700 uppercase tracking-wide">
+                        Participant Full Name
+                    </label>
+                    <p class="text-[11px] text-gray-400">
+                        Please provide your full legal name. This spelling will be irreversibly stamped onto your printable elite certificate document.
+                    </p>
+                    <div class="relative mt-2">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 pointer-events-none text-xs">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                        <input type="text" id="cert-full-name" required placeholder="e.g., Aarav Sharma"
+                            class="block w-full pl-9 pr-3 py-2.5 text-sm bg-zinc-50 border border-zinc-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition duration-150 text-gray-800 placeholder-gray-400 font-medium" />
+                    </div>
+                </div>
+
+                <!-- Action Button Footers -->
+                <div class="pt-4 border-t border-zinc-100 flex items-center justify-end gap-2">
+                    <button type="button" onclick="document.getElementById('certificate-modal').classList.add('hidden')"
+                        class="px-4 py-2 text-xs font-bold uppercase text-zinc-500 hover:text-zinc-700 transition cursor-pointer">
+                        Cancel
+                    </button>
+                    <button type="submit"
+                        class="bg-blue-900 hover:bg-blue-800 text-white font-bold px-5 py-2 rounded-xl text-xs uppercase tracking-wider transition shadow flex items-center gap-1.5">
+                        <i class="fa-solid fa-file-pdf"></i> Generate &amp; Download
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Status Gateway Modal Loader Window -->
     <div id="payment-modal"
