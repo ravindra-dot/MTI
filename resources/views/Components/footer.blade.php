@@ -51,7 +51,7 @@
                         class="text-zinc-400 hover:text-orange-400 transition-colors duration-200">
                         About Us
                     </a>
-                    <a href="/terms&conditions"
+                    <a href="/terms&conditions-policy"
                         class="text-zinc-400 hover:text-orange-400 transition-colors duration-200">
                         Terms & Conditions
                     </a>
@@ -59,9 +59,13 @@
                         class="text-zinc-400 hover:text-orange-400 transition-colors duration-200">
                         Contact Us
                     </a>
-                    <a href="/refund-policy"
+                    <a href="/privacy-policy"
                         class="text-zinc-400 hover:text-orange-400 transition-colors duration-200">
-                        Refund Policy
+                        Privacy Policy
+                    </a>
+                    <a href="/refund-cancellation-policy"
+                        class="text-zinc-400 hover:text-orange-400 transition-colors duration-200">
+                        Refund & Cancellation Policy
                     </a>
                 </div>
             </div>
@@ -159,7 +163,7 @@
                         class="hover:text-white transition-colors">
                         About
                     </a>
-                    <a href="/terms&conditions"
+                    <a href="/terms&conditions-policy"
                         class="hover:text-white transition-colors">
                         Terms & Conditions
                     </a>
@@ -167,9 +171,13 @@
                         class="hover:text-white transition-colors">
                         Contact
                     </a>
-                    <a href="/refund-policy"
+                    <a href="/refund-cancellation-policy"
                         class="hover:text-white transition-colors">
-                        Refund Policy
+                        Refund & Cancellation Policy
+                    </a>
+                    <a href="/privacy-policy"
+                        class="hover:text-white transition-colors">
+                        Privacy Policy
                     </a>
                 </div>
             </div>

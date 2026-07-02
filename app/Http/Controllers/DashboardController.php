@@ -81,8 +81,20 @@ class DashboardController extends Controller
     public function uploadArtwork(Request $request)
     {
         $request->validate([
-            'artwork_file' => 'required|file|mimes:jpg,jpeg,png,pdf|max:5120'
-        ]);
+            'artwork_file' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048'
+        ],
+        [
+        'artwork_file.max' => 'File size must be less than 2 MB.',
+        'artwork_file.mimes' => 'Only JPG, PNG and PDF files are allowed.',
+        'artwork_file.required' => 'Please select a file.'
+         ]
+        );
+
+        if($request->file('artwork_file')->getSize() > 2048 * 1024) {
+                return back()->with('error', 'File size must be less than 2MB.');
+                $message = 'File size must be less than 2MB.';
+            }
+
 
         $enrollment = $this->getEnrollment();
 
@@ -112,7 +124,13 @@ class DashboardController extends Controller
     /* ===============================
         DEMO PAYMENT
     =============================== */
-    public function demoPayment()
+    public function checkout(){
+        $enrollment = $this->getEnrollment();
+
+        return view('checkout', compact('enrollment'));
+    }
+
+    public function processPayment()
     {
         $enrollment = Enrollment::firstOrCreate(
             [
@@ -129,7 +147,9 @@ class DashboardController extends Controller
         $enrollment->payment_amount = 49;
         $enrollment->save();
 
-        return back()->with('success', 'Demo payment successful.');
+        return redirect()
+            ->route('dashboard')
+            ->with('success', 'Payment successful.');
     }
 
     /* ===============================

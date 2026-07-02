@@ -61,6 +61,11 @@
                         About Us
                     </a>
 
+                    <a href="/gallery"
+                        class="hover:text-orange-500 transition duration-200">
+                        Gallery
+                    </a>
+
                     <a href="/contact"
                         class="hover:text-orange-500 transition duration-200">
                         Contact
@@ -466,6 +471,12 @@
 
                                         @if(!$enrollment->artwork_file)
 
+                                            @error('artwork_file')
+                                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-3">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+
                                             <form action="{{ route('artwork.upload') }}"
                                                 method="POST"
                                                 enctype="multipart/form-data"
@@ -492,7 +503,7 @@
                                                     </span>
 
                                                     <span class="block text-[10px] text-gray-400 mt-1">
-                                                        JPG, PNG or PDF
+                                                        File should be less then 2MB. Supported formats: JPG, PNG, PDF.
                                                     </span>
 
                                                 </button>
@@ -556,14 +567,13 @@
                                 </div>
                             @else
                                 <!-- PAYMENT PENDING -->
-                                <form action="/demo-payment" method="POST">
-                                    @csrf
-                                    <button type="submit"
-                                        class="w-full bg-orange-500 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-widest shadow-md hover:bg-orange-600 transition block text-center cursor-pointer">
-                                        <i class="fa-solid fa-credit-card mr-1"></i>
-                                        Pay Fee and Unlock Certificate
-                                    </button>
-                                </form>
+                                <a href="{{ route('checkout') }}"
+                                class="w-full bg-orange-500 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-widest shadow-md hover:bg-orange-600 transition block text-center">
+
+                                    <i class="fa-solid fa-credit-card mr-1"></i>
+                                    Pay Fee and Unlock Certificate
+
+                                </a>
 
                                 <!-- LOCKED STATE INFO -->
                                 <div class="text-[11px] text-gray-400 text-center">
@@ -758,6 +768,7 @@
 
         </div>
     </div>
+
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
 </body>

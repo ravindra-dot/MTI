@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 
@@ -28,10 +29,11 @@ Route::get('/auth', function () {
     ]);
 })->name('login');
 
-Route::view('/terms&conditions', 'terms');
+Route::view('/terms&conditions-policy', 'terms');
 Route::view('/about-us', 'aboutus');
 Route::view('/contact', 'contact');
-Route::view('/refund-policy', 'refund-policy');
+Route::view('/refund-cancellation-policy', 'refund-policy');
+Route::view('/privacy-policy', 'privacy-policy');
 
 Route::get('/gallery', [GalleryController::class, 'index'])
     ->name('gallery');
@@ -42,6 +44,12 @@ Route::get('/gallery', [GalleryController::class, 'index'])
 */
 
 Route::middleware('guest')->group(function () {
+
+    Route::post('/send-otp', [AuthController::class, 'sendOtp'])
+        ->middleware('throttle:5,1');
+
+    Route::post('/verify-otp', [AuthController::class, 'verifyOtp'])
+        ->middleware('throttle:10,1');
 
     Route::post('/register', [AuthController::class, 'register'])
         ->name('register');
@@ -66,9 +74,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 
-    Route::post('/demo-payment', [DashboardController::class, 'demoPayment'])
-        ->name('demo.payment');
-
     Route::post('/blueprint/download', [DashboardController::class, 'markBlueprintDownloaded'])
         ->name('blueprint.download');
 
@@ -80,6 +85,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/certificate/final', [DashboardController::class, 'finalCertificate'])
         ->name('certificate.final');
+
+    Route::get('/checkout', [DashboardController::class, 'checkout'])
+        ->name('checkout');
+
+    Route::post('/checkout/pay', [DashboardController::class, 'processPayment'])
+        ->name('checkout.pay');
+
 });
 
 /*

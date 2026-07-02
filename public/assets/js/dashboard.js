@@ -10,6 +10,22 @@ function toggleElementDisplay(id, shouldShow) {
     }
 }
 
+function triggerCheckoutPayment() {
+    const paymentModal = document.getElementById("payment-modal");
+
+    if (!paymentModal) {
+        setUIState("paid");
+        return;
+    }
+
+    paymentModal.classList.remove("hidden");
+
+    setTimeout(() => {
+        paymentModal.classList.add("hidden");
+        setUIState("paid");
+    }, 2500);
+}
+
 /*====================================================
     --- DOM CONTENT LOADED ---
 =====================================================*/

@@ -1,54 +1,112 @@
+const config = window.appConfig || {};
 /*==================
 SWITCH AUTH TABS
 ====================*/
 function switchAuthTab(target) {
-
     const loginForm = document.getElementById('form-login');
     const registerForm = document.getElementById('form-register');
 
     const tabLogin = document.getElementById('tab-login');
     const tabRegister = document.getElementById('tab-register');
 
-    if (target === 'login') {
+    if (!loginForm || !registerForm) return;
 
-        loginForm.classList.remove('hidden');
-        registerForm.classList.add('hidden');
+    const showLogin = target === 'login';
 
-        tabLogin.classList.add('text-blue-900', 'border-blue-900', 'bg-white');
-        tabLogin.classList.remove('text-gray-400', 'bg-gray-50');
+    loginForm.classList.toggle('hidden', !showLogin);
+    registerForm.classList.toggle('hidden', showLogin);
 
-        tabRegister.classList.remove('text-blue-900', 'border-blue-900', 'bg-white');
-        tabRegister.classList.add('text-gray-400', 'bg-gray-50');
+    tabLogin?.classList.toggle('text-blue-900', showLogin);
+    tabLogin?.classList.toggle('border-blue-900', showLogin);
+    tabLogin?.classList.toggle('bg-white', showLogin);
 
-    } else {
-
-        registerForm.classList.remove('hidden');
-        loginForm.classList.add('hidden');
-
-        tabRegister.classList.add('text-blue-900', 'border-blue-900', 'bg-white');
-        tabRegister.classList.remove('text-gray-400', 'bg-gray-50');
-
-        tabLogin.classList.remove('text-blue-900', 'border-blue-900', 'bg-white');
-        tabLogin.classList.add('text-gray-400', 'bg-gray-50');
-    }
+    tabRegister?.classList.toggle('text-blue-900', !showLogin);
+    tabRegister?.classList.toggle('border-blue-900', !showLogin);
+    tabRegister?.classList.toggle('bg-white', !showLogin);
 }
 
+/* =========================
+   PASSWORD TOGGLE
+========================= */
 function togglePassword(inputId, iconId) {
-
     const input = document.getElementById(inputId);
     const icon = document.getElementById(iconId);
 
-    if (input.type === 'password') {
-        input.type = 'text';
+    if (!input) return;
 
-        icon.classList.remove('fa-eye');
-        icon.classList.add('fa-eye-slash');
+    const isHidden = input.type === "password";
+    input.type = isHidden ? "text" : "password";
 
-    } else {
-
-        input.type = 'password';
-
-        icon.classList.remove('fa-eye-slash');
-        icon.classList.add('fa-eye');
-    }
+    icon?.classList.toggle("fa-eye", !isHidden);
+    icon?.classList.toggle("fa-eye-slash", isHidden);
 }
+
+/* =========================
+   SEND OTP
+========================= */
+window.sendOtp = function () {
+    const email = document.getElementById("reg-email").value;
+    const errorBox = document.getElementById("email-error");
+
+    if (errorBox) errorBox.innerText = "";
+
+    if (!email) {
+        if (errorBox) errorBox.innerText = "Email required";
+        return;
+    }
+
+    fetch("/send-otp", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": config.csrfToken
+        },
+        body: JSON.stringify({ email })
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        if (!data.status) {
+            if (errorBox) errorBox.innerText = data.message;
+            return;
+        }
+
+        errorBox.innerText = "";
+
+        document.getElementById("step-email").classList.add("hidden");
+        document.getElementById("step-otp").classList.remove("hidden");
+    });
+};
+
+/* =========================
+   VERIFY OTP
+========================= */
+window.verifyOtp = function () {
+    const email = document.getElementById("reg-email").value;
+    const otp = document.getElementById("otp").value;
+
+    const box = document.getElementById("otp-error");
+    if (box) box.innerText = "";
+
+    fetch("/verify-otp", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": config.csrfToken
+        },
+        body: JSON.stringify({ email, otp })
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        if (!data.status) {
+            if (box) box.innerText = data.message;
+            return;
+        }
+
+        box.innerText = "";
+
+        document.getElementById("step-otp").classList.add("hidden");
+        document.getElementById("step-register").classList.remove("hidden");
+    });
+};
